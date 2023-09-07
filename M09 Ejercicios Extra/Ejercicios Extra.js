@@ -6,6 +6,15 @@ function deObjetoAarray(objeto) {
    // Estos elementos debe ser cada par clave:valor del objeto recibido.
    // [EJEMPLO]: {D: 1, B: 2, C: 3} ---> [['D', 1], ['B', 2], ['C', 3]].
    // Tu código:
+   var aux = [];
+   var res = [];
+   for (let atr in objeto) {
+     aux.push(atr);
+     aux.push(objeto[atr]);
+     res.push(aux);
+     aux = [];
+  }
+  return res;
 }
 
 function numberOfCharacters(string) {
@@ -14,6 +23,29 @@ function numberOfCharacters(string) {
    // Las letras deben estar en orden alfabético.
    // [EJEMPLO]: "adsjfdsfsfjsdjfhacabcsbajda" ---> { a: 5, b: 2, c: 2, d: 4, f: 4, h:1, j: 4, s: 5 }
    // Tu código:
+   var contarLetra = function(string, letra){
+      let suma = 0;
+        string.forEach(element => {
+          if(element == letra){
+            ++suma;
+          }
+        });
+        contenedor.push(letra);
+        return suma;
+     }
+   
+    var string = string.split('');
+    string.sort();
+    var contenedor = []
+    var ob = {};
+    for (let i = 0; i < string.length; i++) {
+       if(!contenedor.includes(string[i])){
+         let suma = contarLetra(string,string[i]);
+         ob[string[i]] = suma;
+       }
+    }
+   
+      return ob;
 }
 
 function capToFront(string) {
@@ -22,25 +54,62 @@ function capToFront(string) {
    // Retornar el string.
    // [EJEMPLO]: soyHENRY ---> HENRYsoy
    // Tu código:
+   var res = "";
+   var res2 = "";
+   string = string.split('')
+   string.forEach(element => {
+    let mayuscula = element.toUpperCase();
+    console.log(element);
+    console.log(mayuscula);
+    if(mayuscula == element){
+      res = res +""+element;
+    }else{
+      res2 = res2+element;
+    }
+  });
+  return res+res2;
+
 }
 
 function asAmirror(frase) {
    // Recibes una frase. Tu tarea es retornar un nuevo string en el que el orden de las palabras sea el mismo.
    // La diferencia es que cada palabra estará escrita al inverso.
    // [EJEMPLO]: "The Henry Challenge is close!"  ---> "ehT yrneH egnellahC si !esolc"
-   // Tu código:
+   // Tucódigo:
+   var res = "";
+   var aux = []
+   var i = 0;
+   frase = frase.split(' ');
+   frase.forEach(element => {
+      element = element.split('');
+      element = element.reverse();
+      element = element.join('');
+      aux[i] = element; 
+      i++;
+   });
+   res = aux.join(' ');
+   return res;
 }
 
 function capicua(numero) {
    // Si el número que recibes es capicúa debes retornar el string: "Es capicua".
    // Caso contrario: "No es capicua".
    // Tu código:
+   numero = String(numero);
+  var aux = numero.split('');
+  aux.reverse();
+  aux = aux.join('');
+  return (aux === numero)? "Es capicua": "No es capicua"
+
 }
 
 function deleteAbc(string) {
    // Tu tarea es eliminar las letras "a", "b" y "c" del string recibido.
    // Retorna el string sin estas letras.
    // Tu código:
+let rege = /[abc]/g
+return string.replace(rege,'');
+
 }
 
 function sortArray(arrayOfStrings) {
@@ -49,6 +118,21 @@ function sortArray(arrayOfStrings) {
    // de la longitud de cada string.
    // [EJEMPLO]: ["You", "are", "beautiful", "looking"]  ---> [“You", "are", "looking", "beautiful"]
    // Tu código:
+   for (var i = 0; i < arrayOfStrings.length; i++) {
+
+      for (var j = i ; j <arrayOfStrings.length; j++) {
+        
+         if(arrayOfStrings[j].length < arrayOfStrings[i].length){
+          let auxj = arrayOfStrings[j];
+          let auxi = arrayOfStrings[i];
+          arrayOfStrings[i] = auxj;
+          arrayOfStrings[j] = auxi;
+          j = i;
+         }
+        
+      }
+    }
+    return arrayOfStrings;
 }
 
 function buscoInterseccion(array1, array2) {
@@ -58,7 +142,17 @@ function buscoInterseccion(array1, array2) {
    // Si no tienen elementos en común, retornar un arreglo vacío.
    // [PISTA]: los arreglos no necesariamente tienen la misma longitud.
    // Tu código:
-}
+   var res = []
+   for (let i = 0; i < array1.length; i++) {
+     if( array2.includes(array1[i]) ){
+       res.push(array1[i]);
+       let indice = array2.indexOf(array1[i]);
+      delete array2[indice];
+     }    
+   }
+   return res;
+ }
+
 
 /*⚠️ NO MODIFIQUES NADA DEBAJO DE ESTO ⚠️*/
 module.exports = {
